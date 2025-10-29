@@ -39,12 +39,43 @@ footer{border-top:1px solid var(--stroke);padding:24px 0;color:var(--muted)}
 </header>
 
 <main class='section'><div class='container'><h2>Forum RP — Taverne des Mines Profondes</h2><p class='muted'>Espace de discussion intégré (Giscus). Un fil par page grâce au mapping <code>pathname</code>.</p></div></main>
-<script src="https://giscus.app/client.js"
-        data-repo="LePingouinViking/Elserath"
-        data-repo-id="R_kgDOLqH2gs"
-        data-category="RP"
-        data-category-id="DIC_kwDOLqH2gs4CxM4W"
-        data-mapping="pathname"
+<script <div id="giscus-container"></div>
+<script>
+  function mountGiscus(term) {
+    const container = document.getElementById('giscus-container');
+    // retire l'iframe existante si on change d'onglet
+    const old = container.querySelector('iframe.giscus-frame');
+    if (old) old.remove();
+
+    const s = document.createElement('script');
+    s.src = 'https://giscus.app/client.js';
+    s.async = true;
+    s.setAttribute('data-repo', 'LePingouinViking/Elserath');
+    /* si tu avais un data-repo-id et data-category-id, garde-les aussi */
+    s.setAttribute('data-category', 'RP');           // ta catégorie Discussions
+    s.setAttribute('data-mapping', 'specific');      // <-- clé !
+    s.setAttribute('data-term', term);               // <-- hash propre (#xxx -> xxx)
+    s.setAttribute('data-reactions-enabled', '1');
+    s.setAttribute('data-emit-metadata', '0');
+    s.setAttribute('data-theme', 'preferred_color_scheme');
+    s.setAttribute('crossorigin', 'anonymous');
+    container.appendChild(s);
+  }
+
+  function currentTerm() {
+    // défaut = 'presentation' ; harmonise tes boutons vers ces slugs ASCII
+    const h = (location.hash || '#presentation').slice(1).trim();
+    return h || 'presentation';
+  }
+
+  // premier montage
+  mountGiscus(currentTerm());
+
+  // re-monte si on change d’onglet (#hash)
+  window.addEventListener('hashchange', () => {
+    mountGiscus(currentTerm());
+  });
+</script>
         data-strict="0"
         data-reactions-enabled="1"
         data-emit-metadata="0"
