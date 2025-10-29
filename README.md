@@ -1,20 +1,13 @@
 
-# La Sainte Pioche — Forum & Taverne (Netlify)
+# La Sainte Pioche — Version FINALE (Giscus partout)
 
-Ce package ajoute :
-- `/forum.html` avec **Giscus** (forum intégré) prérempli pour `LePingouinViking/elserath` et **Widget Discord**
-- Navigation mise à jour
-- Pages Chapitre I–IV prêtes pour les textes canons
+- Forum intégré via **Giscus** (configuré pour `LePingouinViking/Elserath`)
+- Un **fil de discussion par page** (forum.html + chapitres) grâce à `data-mapping="pathname"`
+- Taverne Discord : remplacez `TON_SERVER_ID` dans `taverne.html` (et ajoutez le widget dans les paramètres du serveur).
 
-## Déployer
-1) Dézippez ce dossier
-2) Glissez le **dossier** dans https://app.netlify.com/drop
+## Déploiement
+1) Uploadez tous les fichiers dans https://github.com/LePingouinViking/Elserath (branche main)
+2) Glissez le dossier sur https://app.netlify.com/drop (ou reliez le repo sur Netlify)
+3) `lasaintepioche.fr` s’actualise automatiquement.
 
-## Giscus (Forum intégré)
-- Créez le repo GitHub public `LePingouinViking/elserath`, activez **Discussions**, créez la catégorie `RP`
-- Sur https://giscus.app, récupérez `repo-id` et `category-id`
-- Dans `/forum.html`, remplacez `REPO_ID_A_METTRE` et `CAT_ID_A_METTRE`
-
-## Discord (Taverne)
-- Dans Discord : Paramètres serveur → **Widget** → Activer → Copiez l’ID du serveur
-- Remplacez `TON_SERVER_ID` dans l’iframe de `/forum.html`
+Bon jeu !
