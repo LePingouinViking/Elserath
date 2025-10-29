@@ -1,98 +1,152 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Forum — La Sainte Pioche</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;800&family=Cardo:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <meta charset="utf-8">
+  <title>Forum RP — Taverne des Mines Profondes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="/assets/favicon.png" />
+  <link rel="stylesheet" href="/assets/site.css">
   <style>
-:root{--bg:#15120E;--text:#F1E9D2;--muted:#C9BA99;--stroke:#3B2E20}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Cardo,serif}
-.container{max-width:1100px;margin:auto;padding:0 20px}
-header{position:sticky;top:0;background:rgba(0,0,0,.25);backdrop-filter:blur(6px)}
-.nav{display:flex;justify-content:space-between;align-items:center;padding:12px 0}
-.menu a{margin-right:12px;font-weight:700}
-.section{padding:40px 0;border-top:1px solid var(--stroke)}
-h1,h2{font-family:Cinzel,serif}
-.muted{color:var(--muted)}
-footer{border-top:1px solid var(--stroke);padding:24px 0;color:var(--muted)}
-</style>
+    .pillbar{display:flex;flex-wrap:wrap;gap:.5rem;margin:1rem 0 1.25rem}
+    .pill{border:1px solid #7a4a17;border-radius:999px;padding:.4rem .8rem;font-size:.95rem;
+          background:rgba(122,74,23,.12);color:#f0d2a6;cursor:pointer;user-select:none}
+    .pill.active{background:#7a4a17;color:#fff}
+    .section{max-width:980px;margin:0 auto}
+    .card{background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:16px}
+    .hint{opacity:.85;font-size:.95rem}
+    .quicklinks{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:12px}
+    .quicklinks a{border:1px dashed #7a4a17;color:#f0d2a6;padding:.35rem .7rem;border-radius:999px;text-decoration:none}
+    .discord-wrap{margin:1rem 0}
+    .discord-wrap iframe{width:100%;height:420px;border:0;border-radius:12px;display:block}
+  </style>
 </head>
 <body>
-
-<header>
-  <div class="container nav">
-    <div style="display:flex;align-items:center;gap:12px">
-      <span style="width:44px;height:44px;border-radius:999px;overflow:hidden;display:inline-grid;place-items:center;background:#2B2219">
-        <img src="https://i.postimg.cc/kg8XrqWW/Logo-sainte-pioche-1.png" alt="Logo — La Sainte Pioche" style="width:100%;height:100%;object-fit:cover"/>
-      </span>
-      <span style="font-family:Cinzel,serif;font-weight:800">La Sainte Pioche</span>
-    </div>
-    <nav class="menu" aria-label="Navigation principale">
-      <a href="/index.html">Accueil</a>
+  <header class="site-header">
+    <nav class="nav">
+      <a href="/">Accueil</a>
       <a href="/lore.html">Lore</a>
       <a href="/annexes.html">Annexes</a>
-      <a href="/forum.html">Forum</a>
+      <a href="/forum.html" class="active">Forum</a>
       <a href="/taverne.html">Taverne</a>
       <a href="/contact.html">Contact</a>
     </nav>
-  </div>
-</header>
+  </header>
 
-<main class='section'><div class='container'><h2>Forum RP — Taverne des Mines Profondes</h2><p class='muted'>Espace de discussion intégré (Giscus). Un fil par page grâce au mapping <code>pathname</code>.</p></div></main>
-<script <div id="giscus-container"></div>
-<script>
-  function mountGiscus(term) {
-    const container = document.getElementById('giscus-container');
-    // retire l'iframe existante si on change d'onglet
-    const old = container.querySelector('iframe.giscus-frame');
-    if (old) old.remove();
+  <main class="section">
+    <h1>Forum RP — Taverne des Mines Profondes</h1>
+    <p class="hint">Choisis une période ci-dessous. S’il n’existe pas encore de fil, il sera créé au premier commentaire (catégorie <strong>RP</strong>).</p>
 
-    const s = document.createElement('script');
-    s.src = 'https://giscus.app/client.js';
-    s.async = true;
-    s.setAttribute('data-repo', 'LePingouinViking/Elserath');
-    /* si tu avais un data-repo-id et data-category-id, garde-les aussi */
-    s.setAttribute('data-category', 'RP');           // ta catégorie Discussions
-    s.setAttribute('data-mapping', 'specific');      // <-- clé !
-    s.setAttribute('data-term', term);               // <-- hash propre (#xxx -> xxx)
-    s.setAttribute('data-reactions-enabled', '1');
-    s.setAttribute('data-emit-metadata', '0');
-    s.setAttribute('data-theme', 'preferred_color_scheme');
-    s.setAttribute('crossorigin', 'anonymous');
-    container.appendChild(s);
-  }
+    <!-- Périodes RP -->
+    <div class="pillbar" id="rp-pills">
+      <button class="pill" data-term="Présentation">👋 Présentation</button>
+      <button class="pill" data-term="Fracture du Ciel">⚡ Fracture du Ciel</button>
+      <button class="pill" data-term="Âge mythologique">🌄 Âge Mythologique</button>
+      <button class="pill" data-term="Éclipse des Voix">🌑 Éclipse des Voix</button>
+      <button class="pill" data-term="Silence Retrouvé">🕯️ Silence Retrouvé</button>
+      <button class="pill" data-term="Guerre d’Astral">⚔️ Guerre d’Astral</button>
+      <button class="pill" data-term="Âge des Cités d’Acier">🏙️ Âge des Cités d’Acier</button>
+      <button class="pill" data-term="Grande Dissonance">🩸 Grande Dissonance</button>
+      <button class="pill" data-term="Ère actuelle">✨ Ère actuelle</button>
+    </div>
 
-  function currentTerm() {
-    // défaut = 'presentation' ; harmonise tes boutons vers ces slugs ASCII
-    const h = (location.hash || '#presentation').slice(1).trim();
-    return h || 'presentation';
-  }
+    <!-- Discord widget -->
+    <div class="discord-wrap card" id="discord">
+      <iframe
+        src="https://discord.com/widget?id=1432938645991456828&theme=dark"
+        allowtransparency="true"
+        sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
+      </iframe>
+      <div class="quicklinks">
+        <a href="#discussion" data-term="Présentation">Se présenter</a>
+        <a href="#discussion" data-term="Fracture du Ciel">RP — Fracture</a>
+        <a href="#discussion" data-term="Âge mythologique">RP — Âge mythologique</a>
+        <a href="#discussion" data-term="Éclipse des Voix">RP — Éclipse</a>
+        <a href="#discussion" data-term="Silence Retrouvé">RP — Silence</a>
+        <a href="#discussion" data-term="Guerre d’Astral">RP — Astral</a>
+        <a href="#discussion" data-term="Âge des Cités d’Acier">RP — Cités d’Acier</a>
+        <a href="#discussion" data-term="Grande Dissonance">RP — Dissonance</a>
+        <a href="#discussion" data-term="Ère actuelle">RP — Ère actuelle</a>
+      </div>
+    </div>
 
-  // premier montage
-  mountGiscus(currentTerm());
+    <!-- Zone discussion -->
+    <div id="discussion" class="card">
+      <p class="hint" style="margin-top:0">💬 Si le thread n’existe pas encore, Giscus le créera automatiquement dans “RP”.</p>
+      <div id="giscus_container"></div>
+    </div>
+  </main>
 
-  // re-monte si on change d’onglet (#hash)
-  window.addEventListener('hashchange', () => {
-    mountGiscus(currentTerm());
-  });
-</script>
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="bottom"
-        data-theme="preferred_color_scheme"
-        crossorigin="anonymous"
-        async>
-</script>
+  <script>
+    // Config Giscus (fixe)
+    const GISCUS_BASE = "https://giscus.app/client.js";
+    const GISCUS_COMMON = {
+      "data-repo": "LePingouinViking/Elserath",
+      "data-repo-id": "",          // optionnel si data-repo est bien public
+      "data-category": "RP",       // on cible par NOM (évite de casser si l’ID change)
+      "data-mapping": "specific",  // piloté par data-term
+      "data-strict": "0",
+      "data-reactions-enabled": "1",
+      "data-emit-metadata": "0",
+      "data-input-position": "bottom",
+      "data-theme": "dark",
+      "crossorigin": "anonymous",
+      "async": ""
+    };
 
+    function mountGiscus(term){
+      const box = document.getElementById("giscus_container");
+      box.innerHTML = ""; // reset
+      const s = document.createElement("script");
+      s.src = GISCUS_BASE;
+      for (const [k,v] of Object.entries(GISCUS_COMMON)) s.setAttribute(k,v);
+      s.setAttribute("data-term", term);
+      box.appendChild(s);
+      // Marquer le bouton actif
+      document.querySelectorAll('.pill').forEach(b=>b.classList.toggle('active', b.dataset.term===term));
+      // Mettre l’ancre claire
+      history.replaceState(null, "", "#"+encodeURIComponent(term.toLowerCase().replaceAll(" ", "-")));
+    }
 
-<footer>
-  <div class="container" style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap">
-    <small>© <span id="year"></span> La Sainte Pioche.</small>
-    <small><a href="#">Mentions légales</a> · <a href="#">Confidentialité</a></small>
-  </div>
-  <script>document.addEventListener('DOMContentLoaded',()=>{const y=document.getElementById('year');if(y) y.textContent=new Date().getFullYear()});</script>
-</footer>
+    // Navigation par boutons
+    document.getElementById("rp-pills").addEventListener("click", (e)=>{
+      const btn = e.target.closest(".pill");
+      if(!btn) return;
+      mountGiscus(btn.dataset.term);
+      document.getElementById("discussion").scrollIntoView({behavior:"smooth"});
+    });
 
+    // Liens rapides sous le widget
+    document.querySelector(".quicklinks").addEventListener("click",(e)=>{
+      const a = e.target.closest("a[data-term]");
+      if(!a) return;
+      e.preventDefault();
+      mountGiscus(a.dataset.term);
+      document.getElementById("discussion").scrollIntoView({behavior:"smooth"});
+    });
+
+    // Term par défaut (depuis #ancre ou “Fracture du Ciel” si none)
+    const hashToTerm = (h)=>{
+      const map = {
+        "presentation":"Présentation",
+        "fracture":"Fracture du Ciel",
+        "âge-mythologique":"Âge mythologique",
+        "age-mythologique":"Âge mythologique",
+        "eclipse":"Éclipse des Voix",
+        "éclipse-des-voix":"Éclipse des Voix",
+        "silence":"Silence Retrouvé",
+        "guerre-d’astral":"Guerre d’Astral",
+        "guerre-d-astral":"Guerre d’Astral",
+        "cités-d’acier":"Âge des Cités d’Acier",
+        "cites-d-acier":"Âge des Cités d’Acier",
+        "dissonance":"Grande Dissonance",
+        "ère-actuelle":"Ère actuelle",
+        "ere-actuelle":"Ère actuelle"
+      };
+      return map[h] || "Fracture du Ciel";
+    };
+
+    const initialTerm = hashToTerm(decodeURIComponent(location.hash.replace("#","")).toLowerCase());
+    mountGiscus(initialTerm);
+  </script>
 </body>
 </html>
